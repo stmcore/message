@@ -1,0 +1,62 @@
+[
+  {
+    "Name": "KBS World HD",
+    "UID": "59f64e52-d98f-4663-809b-f3a3e621522e",
+    "Service": "titan16"
+  },
+  {
+    "Name": "National Geographic HD",
+    "UID": "24fd7124-4542-4ea7-a798-30a0415f0f04",
+    "Service": "titan16"
+  },
+  {
+    "Name": "Food Network HD",
+    "UID": "25c940a9-8770-44a8-b467-38e7d280a003",
+    "Service": "titan16"
+  },
+  {
+    "Name": "Warner TV HD",
+    "UID": "5b767f09-74a1-4c5a-bdc5-b16468b12a4e",
+    "Service": "titan16"
+  },
+  {
+    "Name": "Cartoon Network HD",
+    "UID": "59f64e52-d98f-4663-809b-f3a3e621522e",
+    "Service": "titan17"
+  },
+  {
+    "Name": "H2",
+    "UID": "ef04c249-2fd4-485d-879a-4d5910cc1c78",
+    "Service": "titan17"
+  },
+  {
+    "Name": "NBT",
+    "UID": "0e30bbea-3483-4a7b-89a8-b58c95ff5210",
+    "Service": "titan17"
+  },
+  {
+    "Name": "CNN HD",
+    "UID": "25c940a9-8770-44a8-b467-38e7d280a003",
+    "Service": "titan17"
+  },
+  {
+    "Name": "ThaiPBS HD",
+    "UID": "59f64e52-d98f-4663-809b-f3a3e621522e",
+    "Service": "titan25"
+  },
+  {
+    "Name": "Sony HD",
+    "UID": "25c940a9-8770-44a8-b467-38e7d280a003",
+    "Service": "titan25"
+  },
+  {
+    "Name": "Channel 5 HD",
+    "UID": "8b95532b-3601-4303-9b7e-4610074be0f9",
+    "Service": "titan25"
+  },
+  {
+    "Name": "LifeTime HD",
+    "UID": "188d8ea8-386a-451f-86a6-efef3838bf30",
+    "Service": "titan25"
+  }
+]
