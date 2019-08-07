@@ -241,3 +241,38 @@ func (self *Message) ConvertToImage(encoded string) error {
 
 	return nil
 }
+
+func (self *Message) ConvertToImageOriginalSize(encoded string) error {
+	var err error
+	var thumbnail image.Image
+
+	reader := base64.NewDecoder(base64.StdEncoding, strings.NewReader(encoded))
+
+	thumbnail, _, err = image.Decode(reader)
+
+	if err != nil {
+		return err
+	}
+
+	out, err := os.Create(self.Path + self.FileName)
+
+	if err != nil {
+		return err
+	}
+
+	defer out.Close()
+
+	//m := resize.Resize(120, 91, thumbnail, resize.Lanczos3)
+
+	//self.Colors = getDominantColor(m)
+
+	//self.DominantColorRef = cmp.Equal(self.Colors, colorRef1) || cmp.Equal(self.Colors, colorRef2) || cmp.Equal(self.Colors, colorRef3) || cmp.Equal(self.Colors, colorRef4)
+
+	err = jpeg.Encode(out, thumbnail, nil)
+
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
