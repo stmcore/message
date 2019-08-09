@@ -81,12 +81,12 @@ func init() {
 		log.Fatalln(err)
 	}
 
-	file, _ = ioutil.ReadFile("./elemental.json")
-	err = json.Unmarshal([]byte(file), &elementalconf)
+	// file, _ = ioutil.ReadFile("./elemental.json")
+	// err = json.Unmarshal([]byte(file), &elementalconf)
 
-	if err != nil {
-		log.Fatalln(err)
-	}
+	// if err != nil {
+	// 	log.Fatalln(err)
+	// }
 
 	file, _ = ioutil.ReadFile("./mediaexcel.json")
 	err = json.Unmarshal([]byte(file), &mediaexcelconf)
