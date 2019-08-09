@@ -3,6 +3,7 @@ package message
 import (
 	"encoding/base64"
 	"encoding/json"
+	"encoding/xml"
 	"image"
 	"image/color"
 	_ "image/gif"
@@ -10,6 +11,7 @@ import (
 	_ "image/png"
 	"io/ioutil"
 	"log"
+	"net/http"
 	"os"
 	"strings"
 	"time"
@@ -18,6 +20,12 @@ import (
 	"github.com/kpango/glg"
 	"github.com/nfnt/resize"
 )
+
+type Elemental struct {
+	Id        string `json:"Id"`
+	Name      string `json:"Name"`
+	Elemental string `json:"Elemental"`
+}
 
 type Message struct {
 	ChName           string
@@ -88,6 +96,22 @@ func init() {
 	}
 }
 
+func getNameChElemental(pid, elementalNode string) Elemental {
+	var data Elemental
+	url := "http://10.18.40.73:8891/" + elementalNode + "/" + pid
+	resp, err := http.Get(url)
+	if err != nil {
+		// handle error
+	}
+	defer resp.Body.Close()
+	body, err := ioutil.ReadAll(resp.Body)
+
+	xml.Unmarshal(body, &data)
+
+	return data
+
+}
+
 func (self *Message) SetNameDotJPG(oldname string, transcoder string) {
 
 	self.FileName = oldname
@@ -135,46 +159,71 @@ func (self *Message) SetNameDotJPG(oldname string, transcoder string) {
 		tmp := strings.Split(oldname, ".")
 		tmp = strings.Split(tmp[0], "_")
 		id := tmp[len(tmp)-1]
-		for _, v := range elementalconf {
-			if v.UID == id && v.Service == "elemental12" {
-				self.FileName = transcoder + "_" + strings.ReplaceAll(v.Name, " ", "_") + ".jpg"
-				self.ChName = v.Name
-				self.Transcoder = "elemental"
-			}
-		}
+
+		elemental := getNameChElemental(id, transcoder)
+
+		self.FileName = transcoder + "_" + elemental.Name + ".jpg"
+		self.ChName = elemental.Name
+		self.Transcoder = "elemental"
+
+		// for _, v := range elementalconf {
+		// 	if v.UID == id && v.Service == "elemental12" {
+		// 		self.FileName = transcoder + "_" + strings.ReplaceAll(v.Name, " ", "_") + ".jpg"
+		// 		self.ChName = v.Name
+		// 		self.Transcoder = "elemental"
+		// 	}
+		// }
 	} else if transcoder == "elemental13" {
 		tmp := strings.Split(oldname, ".")
 		tmp = strings.Split(tmp[0], "_")
 		id := tmp[len(tmp)-1]
-		for _, v := range elementalconf {
-			if v.UID == id && v.Service == "elemental13" {
-				self.FileName = transcoder + "_" + strings.ReplaceAll(v.Name, " ", "_") + ".jpg"
-				self.ChName = v.Name
-				self.Transcoder = "elemental"
-			}
-		}
+
+		elemental := getNameChElemental(id, transcoder)
+
+		self.FileName = transcoder + "_" + elemental.Name + ".jpg"
+		self.ChName = elemental.Name
+		self.Transcoder = "elemental"
+		// for _, v := range elementalconf {
+		// 	if v.UID == id && v.Service == "elemental13" {
+		// 		self.FileName = transcoder + "_" + strings.ReplaceAll(v.Name, " ", "_") + ".jpg"
+		// 		self.ChName = v.Name
+		// 		self.Transcoder = "elemental"
+		// 	}
+		// }
 	} else if transcoder == "elemental14" {
 		tmp := strings.Split(oldname, ".")
 		tmp = strings.Split(tmp[0], "_")
 		id := tmp[len(tmp)-1]
-		for _, v := range elementalconf {
-			if v.UID == id && v.Service == "elemental14" {
-				self.FileName = transcoder + "_" + strings.ReplaceAll(v.Name, " ", "_") + ".jpg"
-				self.ChName = v.Name
-				self.Transcoder = "elemental"
-			}
-		}
+
+		elemental := getNameChElemental(id, transcoder)
+
+		self.FileName = transcoder + "_" + elemental.Name + ".jpg"
+		self.ChName = elemental.Name
+		self.Transcoder = "elemental"
+		// for _, v := range elementalconf {
+		// 	if v.UID == id && v.Service == "elemental14" {
+		// 		self.FileName = transcoder + "_" + strings.ReplaceAll(v.Name, " ", "_") + ".jpg"
+		// 		self.ChName = v.Name
+		// 		self.Transcoder = "elemental"
+		// 	}
+		// }
 	} else if transcoder == "elemental15" {
 		tmp := strings.Split(oldname, ".")
 		tmp = strings.Split(tmp[0], "_")
 		id := tmp[len(tmp)-1]
-		for _, v := range elementalconf {
-			if v.UID == id && v.Service == "elemental15" {
-				self.FileName = transcoder + "_" + strings.ReplaceAll(v.Name, " ", "_") + ".jpg"
-				self.ChName = v.Name
-				self.Transcoder = "elemental"
-			}
-		}
+
+		elemental := getNameChElemental(id, transcoder)
+
+		self.FileName = transcoder + "_" + elemental.Name + ".jpg"
+		self.ChName = elemental.Name
+		self.Transcoder = "elemental"
+		// for _, v := range elementalconf {
+		// 	if v.UID == id && v.Service == "elemental15" {
+		// 		self.FileName = transcoder + "_" + strings.ReplaceAll(v.Name, " ", "_") + ".jpg"
+		// 		self.ChName = v.Name
+		// 		self.Transcoder = "elemental"
+		// 	}
+		// }
 	} else {
 		self.FileName = oldname
 		self.ChName = strings.Split(oldname, ".")[0]
