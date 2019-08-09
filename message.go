@@ -3,7 +3,7 @@ package message
 import (
 	"encoding/base64"
 	"encoding/json"
-	"encoding/xml"
+	"fmt"
 	"image"
 	"image/color"
 	_ "image/gif"
@@ -98,15 +98,15 @@ func init() {
 
 func getNameChElemental(pid, elementalNode string) Elemental {
 	var data Elemental
-	url := "http://10.18.40.73:8891/" + elementalNode + "/" + pid
+	url := "http://10.18.40.73:8891/" + "elemental/" + elementalNode + "/" + pid
 	resp, err := http.Get(url)
 	if err != nil {
-		// handle error
+		fmt.Println(err)
 	}
 	defer resp.Body.Close()
 	body, err := ioutil.ReadAll(resp.Body)
 
-	xml.Unmarshal(body, &data)
+	json.Unmarshal(body, &data)
 
 	return data
 
