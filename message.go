@@ -162,9 +162,15 @@ func (self *Message) SetNameDotJPG(oldname string, transcoder string) {
 
 		elemental := getNameChElemental(id, transcoder)
 
-		self.FileName = transcoder + "_" + elemental.Name + ".jpg"
-		self.ChName = elemental.Name
-		self.Transcoder = "elemental"
+		if elemental.Name == "" {
+			self.FileName = oldname
+			self.ChName = strings.Split(oldname, ".")[0]
+			self.Transcoder = "other"
+		} else {
+			self.FileName = transcoder + "_" + elemental.Name + ".jpg"
+			self.ChName = elemental.Name
+			self.Transcoder = "elemental"
+		}
 
 		// for _, v := range elementalconf {
 		// 	if v.UID == id && v.Service == "elemental12" {
@@ -180,9 +186,15 @@ func (self *Message) SetNameDotJPG(oldname string, transcoder string) {
 
 		elemental := getNameChElemental(id, transcoder)
 
-		self.FileName = transcoder + "_" + elemental.Name + ".jpg"
-		self.ChName = elemental.Name
-		self.Transcoder = "elemental"
+		if elemental.Name == "" {
+			self.FileName = oldname
+			self.ChName = strings.Split(oldname, ".")[0]
+			self.Transcoder = "other"
+		} else {
+			self.FileName = transcoder + "_" + elemental.Name + ".jpg"
+			self.ChName = elemental.Name
+			self.Transcoder = "elemental"
+		}
 		// for _, v := range elementalconf {
 		// 	if v.UID == id && v.Service == "elemental13" {
 		// 		self.FileName = transcoder + "_" + strings.ReplaceAll(v.Name, " ", "_") + ".jpg"
@@ -197,9 +209,15 @@ func (self *Message) SetNameDotJPG(oldname string, transcoder string) {
 
 		elemental := getNameChElemental(id, transcoder)
 
-		self.FileName = transcoder + "_" + elemental.Name + ".jpg"
-		self.ChName = elemental.Name
-		self.Transcoder = "elemental"
+		if elemental.Name == "" {
+			self.FileName = oldname
+			self.ChName = strings.Split(oldname, ".")[0]
+			self.Transcoder = "other"
+		} else {
+			self.FileName = transcoder + "_" + elemental.Name + ".jpg"
+			self.ChName = elemental.Name
+			self.Transcoder = "elemental"
+		}
 		// for _, v := range elementalconf {
 		// 	if v.UID == id && v.Service == "elemental14" {
 		// 		self.FileName = transcoder + "_" + strings.ReplaceAll(v.Name, " ", "_") + ".jpg"
@@ -214,9 +232,16 @@ func (self *Message) SetNameDotJPG(oldname string, transcoder string) {
 
 		elemental := getNameChElemental(id, transcoder)
 
-		self.FileName = transcoder + "_" + elemental.Name + ".jpg"
-		self.ChName = elemental.Name
-		self.Transcoder = "elemental"
+		if elemental.Name == "" {
+			self.FileName = oldname
+			self.ChName = strings.Split(oldname, ".")[0]
+			self.Transcoder = "other"
+		} else {
+			self.FileName = transcoder + "_" + elemental.Name + ".jpg"
+			self.ChName = elemental.Name
+			self.Transcoder = "elemental"
+		}
+
 		// for _, v := range elementalconf {
 		// 	if v.UID == id && v.Service == "elemental15" {
 		// 		self.FileName = transcoder + "_" + strings.ReplaceAll(v.Name, " ", "_") + ".jpg"
