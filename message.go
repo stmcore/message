@@ -102,11 +102,15 @@ func getNameChElemental(pid, elementalNode string) Elemental {
 	resp, err := http.Get(url)
 	if err != nil {
 		fmt.Println(err)
-	}
-	defer resp.Body.Close()
-	body, err := ioutil.ReadAll(resp.Body)
+	} else {
+		defer resp.Body.Close()
+		body, err := ioutil.ReadAll(resp.Body)
 
-	json.Unmarshal(body, &data)
+		if err != nil {
+			fmt.Println(err)
+		}
+		json.Unmarshal(body, &data)
+	}
 
 	return data
 
