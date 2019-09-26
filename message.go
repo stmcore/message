@@ -126,10 +126,23 @@ func (self *Message) SetNameDotJPG(oldname string, transcoder string) {
 		// self.ChName = strings.Split(newname[len(newname)-1], ".")[0]
 		// self.Transcoder = "media_excel"
 		newname := strings.Split(oldname, "_")
+		var code string
+		if len(newname)-2 != 0 {
+			code = newname[len(newname)-2]
+		}
+
 		chname := strings.Split(newname[len(newname)-1], ".")[0]
 
-		self.FileName = "mediaexcel_" + chname + ".jpg"
-		self.ChName = chname
+		nameByFilename := code + "_" + chname
+
+		if code != "" {
+			self.FileName = "mediaexcel_" + nameByFilename + ".jpg"
+			self.ChName = code + " " + chname
+		} else {
+			self.FileName = "mediaexcel_" + chname + ".jpg"
+			self.ChName = chname
+		}
+
 		self.Transcoder = transcoder
 
 		// for _, v := range mediaexcelconf {
