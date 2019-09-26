@@ -135,7 +135,7 @@ func (self *Message) SetNameDotJPG(oldname string, transcoder string) {
 
 		nameByFilename := code + "_" + chname
 
-		if code != "" || code != "VEBOXRMHROHWVMANFUGTBE" {
+		if code != "" && code != "VEBOXRMHROHWVMANFUGTBE" {
 			self.FileName = "mediaexcel_" + nameByFilename + ".jpg"
 			self.ChName = code + " " + chname
 		} else {
