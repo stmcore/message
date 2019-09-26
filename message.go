@@ -128,13 +128,17 @@ func (self *Message) SetNameDotJPG(oldname string, transcoder string) {
 		newname := strings.Split(oldname, "_")
 		chname := strings.Split(newname[len(newname)-1], ".")[0]
 
-		for _, v := range mediaexcelconf {
-			if v.UID == chname {
-				self.FileName = "mediaexcel_" + strings.ReplaceAll(v.Name, " ", "_") + ".jpg"
-				self.ChName = v.Name
-				self.Transcoder = v.Service
-			}
-		}
+		self.FileName = "mediaexcel_" + chname + ".jpg"
+		self.ChName = chname
+		self.Transcoder = transcoder
+
+		// for _, v := range mediaexcelconf {
+		// 	if v.UID == chname {
+		// 		self.FileName = "mediaexcel_" + strings.ReplaceAll(v.Name, " ", "_") + ".jpg"
+		// 		self.ChName = v.Name
+		// 		self.Transcoder = v.Service
+		// 	}
+		// }
 	} else if transcoder == "titan16" {
 		for _, v := range titanconf {
 			if v.Service == transcoder && strings.HasPrefix(oldname, v.UID) {
