@@ -103,7 +103,7 @@ func init() {
 
 func getNameChTitan(pid, titanNode string) Titan {
 	var data Titan
-	url := "http://10.18.12.83:8892/titan/" + titanNode + "/" + pid
+	url := "http://10.18.40.73:8892/titan/" + titanNode + "/" + pid
 	client := http.Client{
 		Timeout: 10 * time.Second,
 	}
