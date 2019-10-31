@@ -43,6 +43,11 @@ type ConfigCh struct {
 	Service string
 }
 
+type Titan struct {
+	Name string `json:"Name"`
+	UID  string `json:"UID"`
+}
+
 func logInfo(log string) {
 	glg.Info(log)
 }
@@ -96,18 +101,46 @@ func init() {
 	}
 }
 
-func getNameChElemental(pid, elementalNode string) Elemental {
-	var data Elemental
-	url := "http://10.18.40.73:8891/" + "elemental/" + elementalNode + "/" + pid
-	resp, err := http.Get(url)
+func getNameChTitan(pid, titanNode string) Titan {
+	var data Titan
+	url := "http://10.18.12.83:8892/titan/" + titanNode + "/" + pid
+	client := http.Client{
+		Timeout: 10 * time.Second,
+	}
+	resp, err := client.Get(url)
 	if err != nil {
-		fmt.Println(err)
+		glg.Info(err)
 	} else {
 		defer resp.Body.Close()
 		body, err := ioutil.ReadAll(resp.Body)
 
 		if err != nil {
-			fmt.Println(err)
+			glg.Info(err)
+		}
+		json.Unmarshal(body, &data)
+	}
+
+	return data
+}
+
+func getNameChElemental(pid, elementalNode string) Elemental {
+	var data Elemental
+	url := "http://10.18.40.73:8891/" + "elemental/" + elementalNode + "/" + pid
+	//resp, err := http.Get(url)
+
+	client := http.Client{
+		Timeout: 10 * time.Second,
+	}
+	resp, err := client.Get(url)
+
+	if err != nil {
+		glg.Info(err)
+	} else {
+		defer resp.Body.Close()
+		body, err := ioutil.ReadAll(resp.Body)
+
+		if err != nil {
+			glg.Info(err)
 		}
 		json.Unmarshal(body, &data)
 	}
@@ -153,29 +186,56 @@ func (self *Message) SetNameDotJPG(oldname string, transcoder string) {
 		// 	}
 		// }
 	} else if transcoder == "titan16" {
-		for _, v := range titanconf {
-			if v.Service == transcoder && strings.HasPrefix(oldname, v.UID) {
-				self.FileName = transcoder + "_" + strings.ReplaceAll(v.Name, " ", "_") + ".jpg"
-				self.ChName = v.Name
-				self.Transcoder = "titan"
-			}
-		}
+		s := strings.Split(oldname, "-")
+		pid := strings.Join(s[:len(s)-1], "-")
+
+		titan := getNameChTitan(pid, transcoder)
+
+		self.FileName = transcoder + "_" + strings.ReplaceAll(titan.Name, " ", "_") + ".jpg"
+		self.ChName = titan.Name
+		self.Transcoder = "titan"
+
+		// for _, v := range titanconf {
+		// 	if v.Service == transcoder && strings.HasPrefix(oldname, v.UID) {
+		// 		self.FileName = transcoder + "_" + strings.ReplaceAll(v.Name, " ", "_") + ".jpg"
+		// 		self.ChName = v.Name
+		// 		self.Transcoder = "titan"
+		// 	}
+		// }
 	} else if transcoder == "titan17" {
-		for _, v := range titanconf {
-			if v.Service == "titan17" && strings.HasPrefix(oldname, v.UID) {
-				self.FileName = transcoder + "_" + strings.ReplaceAll(v.Name, " ", "_") + ".jpg"
-				self.ChName = v.Name
-				self.Transcoder = "titan"
-			}
-		}
+		s := strings.Split(oldname, "-")
+		pid := strings.Join(s[:len(s)-1], "-")
+
+		titan := getNameChTitan(pid, transcoder)
+
+		self.FileName = transcoder + "_" + strings.ReplaceAll(titan.Name, " ", "_") + ".jpg"
+		self.ChName = titan.Name
+		self.Transcoder = "titan"
+
+		// for _, v := range titanconf {
+		// 	if v.Service == "titan17" && strings.HasPrefix(oldname, v.UID) {
+		// 		self.FileName = transcoder + "_" + strings.ReplaceAll(v.Name, " ", "_") + ".jpg"
+		// 		self.ChName = v.Name
+		// 		self.Transcoder = "titan"
+		// 	}
+		// }
 	} else if transcoder == "titan25" {
-		for _, v := range titanconf {
-			if v.Service == "titan25" && strings.HasPrefix(oldname, v.UID) {
-				self.FileName = transcoder + "_" + strings.ReplaceAll(v.Name, " ", "_") + ".jpg"
-				self.ChName = v.Name
-				self.Transcoder = "titan"
-			}
-		}
+		s := strings.Split(oldname, "-")
+		pid := strings.Join(s[:len(s)-1], "-")
+
+		titan := getNameChTitan(pid, transcoder)
+
+		self.FileName = transcoder + "_" + strings.ReplaceAll(titan.Name, " ", "_") + ".jpg"
+		self.ChName = titan.Name
+		self.Transcoder = "titan"
+
+		// for _, v := range titanconf {
+		// 	if v.Service == "titan25" && strings.HasPrefix(oldname, v.UID) {
+		// 		self.FileName = transcoder + "_" + strings.ReplaceAll(v.Name, " ", "_") + ".jpg"
+		// 		self.ChName = v.Name
+		// 		self.Transcoder = "titan"
+		// 	}
+		// }
 	} else if transcoder == "elemental12" {
 		tmp := strings.Split(oldname, ".")
 		tmp = strings.Split(tmp[0], "_")
