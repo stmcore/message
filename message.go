@@ -76,6 +76,16 @@ var colorRef4 = color.RGBA{
 	G: uint8(213),
 	B: uint8(213),
 }
+var colorRef5 = color.RGBA{
+	R: uint8(213),
+	G: uint8(214),
+	B: uint8(213),
+}
+var colorRef6 = color.RGBA{
+	R: uint8(213),
+	G: uint8(213),
+	B: uint8(214),
+}
 
 func init() {
 
@@ -393,7 +403,7 @@ func (self *Message) ConvertToImage(encoded string) error {
 
 	self.Colors = getDominantColor(m)
 
-	self.DominantColorRef = cmp.Equal(self.Colors, colorRef1) || cmp.Equal(self.Colors, colorRef2) || cmp.Equal(self.Colors, colorRef3) || cmp.Equal(self.Colors, colorRef4)
+	self.DominantColorRef = cmp.Equal(self.Colors, colorRef1) || cmp.Equal(self.Colors, colorRef2) || cmp.Equal(self.Colors, colorRef3) || cmp.Equal(self.Colors, colorRef4) || cmp.Equal(self.Colors, colorRef5) || cmp.Equal(self.Colors, colorRef6)
 
 	err = jpeg.Encode(out, m, nil)
 
