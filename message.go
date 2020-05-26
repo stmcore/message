@@ -190,7 +190,7 @@ func (self *Message) SetNameDotJPG(oldname string, transcoder string) {
 		// 		self.Transcoder = v.Service
 		// 	}
 		// }
-	} else if transcoder == "titan16" {
+	} else if strings.HasPrefix(transcoder, "titan") {
 		s := strings.Split(oldname, "-")
 		pid := strings.Join(s[:len(s)-1], "-")
 
@@ -200,47 +200,6 @@ func (self *Message) SetNameDotJPG(oldname string, transcoder string) {
 		self.ChName = titan.Name
 		self.Transcoder = "titan"
 
-		// for _, v := range titanconf {
-		// 	if v.Service == transcoder && strings.HasPrefix(oldname, v.UID) {
-		// 		self.FileName = transcoder + "_" + strings.ReplaceAll(v.Name, " ", "_") + ".jpg"
-		// 		self.ChName = v.Name
-		// 		self.Transcoder = "titan"
-		// 	}
-		// }
-	} else if transcoder == "titan17" {
-		s := strings.Split(oldname, "-")
-		pid := strings.Join(s[:len(s)-1], "-")
-
-		titan := getNameChTitan(pid, transcoder)
-
-		self.FileName = transcoder + "_" + strings.ReplaceAll(titan.Name, " ", "_") + ".jpg"
-		self.ChName = titan.Name
-		self.Transcoder = "titan"
-
-		// for _, v := range titanconf {
-		// 	if v.Service == "titan17" && strings.HasPrefix(oldname, v.UID) {
-		// 		self.FileName = transcoder + "_" + strings.ReplaceAll(v.Name, " ", "_") + ".jpg"
-		// 		self.ChName = v.Name
-		// 		self.Transcoder = "titan"
-		// 	}
-		// }
-	} else if transcoder == "titan25" {
-		s := strings.Split(oldname, "-")
-		pid := strings.Join(s[:len(s)-1], "-")
-
-		titan := getNameChTitan(pid, transcoder)
-
-		self.FileName = transcoder + "_" + strings.ReplaceAll(titan.Name, " ", "_") + ".jpg"
-		self.ChName = titan.Name
-		self.Transcoder = "titan"
-
-		// for _, v := range titanconf {
-		// 	if v.Service == "titan25" && strings.HasPrefix(oldname, v.UID) {
-		// 		self.FileName = transcoder + "_" + strings.ReplaceAll(v.Name, " ", "_") + ".jpg"
-		// 		self.ChName = v.Name
-		// 		self.Transcoder = "titan"
-		// 	}
-		// }
 	} else if transcoder == "elemental12" {
 		tmp := strings.Split(oldname, ".")
 		tmp = strings.Split(tmp[0], "_")
