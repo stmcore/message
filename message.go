@@ -165,7 +165,7 @@ func (self *Message) SetNameDotJPG(oldname string, transcoder string) {
 		// self.Transcoder = "media_excel"
 		newname := strings.Split(oldname, "_")
 		var code string
-		if len(newname) == 5 {
+		if len(newname) == 4 {
 			code = newname[len(newname)-2]
 		}
 
