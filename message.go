@@ -106,9 +106,9 @@ func init() {
 	}
 }
 
-func getNameChTitan(pid, titanNode string) Titan {
+func getNameChTitan(pid, titanNode, urlAPI string) Titan {
 	var data Titan
-	url := "http://10.18.40.73:8892/titan/" + titanNode + "/" + pid
+	url := strings.TrimSuffix(urlAPI, "/") + "/titan/" + titanNode + "/" + pid
 	client := http.Client{
 		Timeout: 10 * time.Second,
 	}
@@ -128,9 +128,9 @@ func getNameChTitan(pid, titanNode string) Titan {
 	return data
 }
 
-func getNameChElemental(pid, elementalNode string) Elemental {
+func getNameChElemental(pid, elementalNode, urlAPI string) Elemental {
 	var data Elemental
-	url := "http://10.18.40.73:8891/" + "elemental/" + elementalNode + "/" + pid
+	url := strings.TrimSuffix(urlAPI, "/") + "/elemental/" + elementalNode + "/" + pid
 	//resp, err := http.Get(url)
 
 	client := http.Client{
@@ -154,7 +154,7 @@ func getNameChElemental(pid, elementalNode string) Elemental {
 
 }
 
-func (self *Message) SetNameDotJPG(oldname string, transcoder string) {
+func (self *Message) SetNameDotJPG(oldname string, transcoder, urlElementalAPI, urlTitanAPI string) {
 
 	self.FileName = oldname
 
@@ -194,7 +194,7 @@ func (self *Message) SetNameDotJPG(oldname string, transcoder string) {
 		s := strings.Split(oldname, "-")
 		pid := strings.Join(s[:len(s)-1], "-")
 
-		titan := getNameChTitan(pid, transcoder)
+		titan := getNameChTitan(pid, transcoder, urlTitanAPI)
 
 		self.FileName = transcoder + "_" + strings.ReplaceAll(titan.Name, " ", "_") + ".jpg"
 		self.ChName = titan.Name
@@ -205,7 +205,7 @@ func (self *Message) SetNameDotJPG(oldname string, transcoder string) {
 		tmp = strings.Split(tmp[0], "_")
 		id := tmp[len(tmp)-1]
 
-		elemental := getNameChElemental(id, transcoder)
+		elemental := getNameChElemental(id, transcoder, urlElementalAPI)
 
 		if elemental.Name == "" {
 			self.FileName = oldname
